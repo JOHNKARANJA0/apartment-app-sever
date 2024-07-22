@@ -21,6 +21,9 @@ cors = "*"
 flask-cors = "*"
 python-dotenv = "*"
 bcrypt = "*"
+flask-session = "*"
+redis = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_full_version = "3.8.13"
