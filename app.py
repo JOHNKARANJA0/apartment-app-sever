@@ -78,7 +78,7 @@ class Users(Resource):
 
     def post(self):
         data = request.get_json()
-        password = "password"
+        password = data['password']
         try:
             password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
             new_user = User(
@@ -86,10 +86,10 @@ class Users(Resource):
                 email=data['email'],
                 user_type=data['user_type']
             )
-            new_user.password_hash = password_hash
+            new_user._password_hash = password_hash
             db.session.add(new_user)
             db.session.commit()
-            return new_user.to_dict(only=('id', 'name', 'email')), 201
+            return new_user.to_dict(only=('id', 'name', 'email', 'user_type')), 201
         except Exception as e:
             db.session.rollback()
             return {"errors": [str(e)]}, 400
