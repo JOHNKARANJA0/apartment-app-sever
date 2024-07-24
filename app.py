@@ -89,7 +89,7 @@ class Users(Resource):
             new_user._password_hash = password_hash
             db.session.add(new_user)
             db.session.commit()
-            return new_user.to_dict(only=('id', 'name', 'email', 'user_type')), 201
+            return {"success": "User created successfully!"}, 201
         except Exception as e:
             db.session.rollback()
             return {"errors": [str(e)]}, 400
